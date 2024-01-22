@@ -1,18 +1,53 @@
 {% extends 'base.html' %}
 
 {% block  content  %}
-
 <div class= "colmd-6 offser-md-3">
 {% if user.is_authenticated %}
 
-<h1>Hello word!</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">city</th>
+      <th scope="col">State</th>
+      <th scope="col">Zipcode</th>
+      <th scope="col">Created At</th>
+      <th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if persons %}
+ 	{% for person in persons %}
+ 		<tr>
+			<td>{{person.first_name}} {{person.last_name}}</td>
+			<td>{{person.email}}</td>
+			<td>{{person.phone}}</td>
+			<td>{{person.adress}}</td>
+			<td>{{person.city}}</td>
+			<td>{{person.state}}</td>
+			<td>{{person.zipcode}}</td>
+			<td>{{person.created_id}}</td>
+			<td>{{person.id}}</td>
+		</tr>
+	
+	{% endfor %}
+  {% endif %}
+    
+  </tbody>
+</table>
+
+
 
 {% else %}
 <h1>Login!</h1>
 <br/>
 <form method ="POST" action="{% url 'home' %}">
 	{%csrf_token %}
-	<form>
+	
   <div class="mb-3">
     <input type="text" class="form-control" name="username", placeholder ="Username" required>
   </div>
@@ -21,10 +56,10 @@
   </div>
   <br/> 
   <button type="submit" class="btn btn-secondary">Login</button>
-</form>
+
 
 </form>
-</div>
+
 
 {% endif %}
 
